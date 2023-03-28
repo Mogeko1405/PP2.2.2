@@ -5,6 +5,7 @@ import web.model.Car;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Component
 public class CarServiceImpl implements CarService {
@@ -20,9 +21,8 @@ public class CarServiceImpl implements CarService {
         cars.add(new Car(5L, "TUGELLA", "555-555"));
     }
 
+    @Override
     public List<Car> index(Long count) {
-        return cars.stream().takeWhile(car -> (car.getId() <= count)).toList();
+        return cars.stream().limit(Objects.requireNonNullElse(count, 5L)).toList();
     }
-
-
 }

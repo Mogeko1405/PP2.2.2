@@ -20,12 +20,8 @@ public class CarController {
     }
 
     @GetMapping()
-    public String index(Model model, @RequestParam(value = "count", required = false) String count) {
-        if (count != null) {
-            model.addAttribute("cars", carService.index(Long.valueOf(count)));
-        } else {
-            model.addAttribute("cars", carService.index(5L));
-        }
+    public String index(Model model, @RequestParam(value = "count", required = false) Long count) {
+        model.addAttribute("cars", carService.index(count));
         return "cars";
     }
 }
